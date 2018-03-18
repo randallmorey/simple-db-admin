@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mongo:
+    image: 'mongo:3.0'
+    command: mongod
+    ports:
+      - 27017:27017
+  npm:
+    image: 'node:9'
+    entrypoint: npm
+    command: run start-admin
+    ports:
+      - 3000:3000
+      - 1234:1234
+    volumes:
+      - ./:/src
+    working_dir: /src
+    depends_on:
+      - mongo
